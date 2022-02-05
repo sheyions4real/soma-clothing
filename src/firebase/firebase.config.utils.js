@@ -18,7 +18,7 @@ const firebaseConfig = {
       // a user is found by firebase auth... check if this user exist and create it if not
       const userRef = firestore.doc(`users/${userAuth.uid}`); // returns a document reference
       const snapShot = await userRef.get();  // use the document reference to get(), set(), delete(), update() and it returns a snapshot
-      console.log(snapShot);
+     // console.log(snapShot);
         if(!snapShot.exists){
             const{ displayName, email} = userAuth;
             const createdAt = new Date();
@@ -51,7 +51,7 @@ const firebaseConfig = {
        // console.log(auth);
         auth.signInWithPopup(provider).then((result) => {
 
-        console.log(result);
+       // console.log(result);
        
         // const credential = GoogleAuthProvider.credentialFromResult(result);
         // const token = credential.accessToken;
