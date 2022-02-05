@@ -1,7 +1,7 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import { auth } from './firebase/firebase.config.utils';
+import { auth , createUserProfileDocument} from './firebase/firebase.config.utils';
 // import logo from './logo.svg';
 import './App.css';
 
@@ -40,9 +40,28 @@ class App extends React.Component {
   componentDidMount(){
     // will set the unSubscribeFromAuth to a method from the firebase auth
     // and when unSubscribeFromAuth is called it will clear the auth user and logout
-   this.unSubscribeFromAuth = auth.onAuthStateChanged(user => {
-      this.setState({currentUser:user});
-      console.log(user);
+    this.unSubscribeFromAuth = auth.onAuthStateChanged( async user => {
+      //s console.log(user);
+          if(user){
+            const userRef = await createUserProfileDocument(user);
+            // confirm fron the snapshot if the record was successfully save using the firestore listened onSnapshot
+
+            userRef.onSnapshot(snapshot => {
+              console.log(snapshot.data());
+              this.setState({
+                currentUser: {
+                  id:snapshot.id,
+                  ...snapshot.data()
+                }
+              })
+            })
+            console.log(this.state);
+          }
+
+          this.setState({currentUser: user});
+    
+     // this.setState({currentUser:user});
+    
     });
 
   }
