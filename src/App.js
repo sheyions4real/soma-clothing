@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import { auth , createUserProfileDocument} from './firebase/firebase.config.utils';
 // import logo from './logo.svg';
 import './App.css';
-
+import {createStructuredSelector} from 'reselect';
 import { setCurrentUser } from './redux/user/user.actions';
-
+import { selectCurrentUser } from './redux/user/user.selectors';
 
 import HomePage from './pages/homepage/homepage.component';
 import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-signup/sign-in-and-signup.component';
-
+import CheckoutPage from './pages/checkout/checkout.component';
 
 
 //  const HatsPage =(props)=>{
@@ -90,6 +90,7 @@ class App extends React.Component {
           <Route exact path="/" component={HomePage} />
           <Route exact path="/shop" component={ShopPage} />
           <Route exact path='/signIn' render={()=> this.props.currentUser? (<Redirect to='/' />): ( <SignInAndSignUpPage />) }/>
+          <Route exact path="/checkout" component={CheckoutPage} />
         </Switch>
       </div>
     
@@ -110,8 +111,13 @@ class App extends React.Component {
 
 //mapDispatchToprops to set the set and mapStateToProps to access the state from the reducers
 
-const mapStateToProps = ({user})=>({
-  currentUser:user.currentUser
+// const mapStateToProps = ({user})=>({
+//   currentUser:user.currentUser
+// });
+
+
+const mapStateToProps = createStructuredSelector({
+  currentUser:selectCurrentUser
 });
 
 export default connect(mapStateToProps,mapDispatchToprops )(App);
