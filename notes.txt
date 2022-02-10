@@ -1,0 +1,87 @@
+to generate ssh key, start the ssh-agent, add the ssh key to the agent and add the ssh key to git hub sshk via settings
+
+// generate an ssh key
+// enter the ssh key file name and the paraphrase which is like a password
+ssh-keygen -t rsa -b 4096 -C "sheyions4real@yahoo.co.uk" 
+
+//list all ssh key in the .ssh folder in c:/users/mattewo
+ls -al ~/.ssh 
+
+
+// copy the content of the new ssh key you can also open file with notepad and copy 
+clip < ~/.ssh/matt_github_rsa.pub 
+
+
+// create new ssh key on your git hub account and add the copied ssh key and save
+
+
+//start the ssh key agent
+eval $(ssh-agent -s) 
+
+// add the ssh key to the agent
+ssh-add ~/.ssh/matt_github_rsa 
+
+// once added when you clone a repo using the ssh you can use the ssh to push to the repo without authentication
+
+
+
+
+npm update -D  // to update all packages
+
+npm audit // to see all vulnurabilities
+
+npm audit fix  // to fix all vulnurabilities when you update
+
+npm install  // to install all the packages again
+
+// after installing you can run the audit fix again
+
+
+
+REACT ROUTING
+
+npm install react-router-dom@5.0.0
+
+in tha app.js  import all pages and set eact route and its corresponding component to render in the render function
+
+clone a repo and run npm install
+
+
+
+REDUX
+install redux react-redux and redux-logger
+
+in the index.js entry point
+import provider from the react-redux package
+ and wrap the browser router and app componsnet inside the provider react redux fragment
+
+create your store and ser the provider store property
+
+create root reducers and set combineReducers to all the reducers for each module state for the application
+
+for eact module state create the module.reducers.js, module.actions.js and module.type.js
+
+in the corresponding module remove the state object and the constrctor 
+ and call redux connect function and pass the mapDispatchToProps function to  the connect object of redux
+
+object to set or register the state with redux
+
+ and call the connect and the mapToStateProps object of redux in any component where you want to pass the state to
+the connect is a function that will modify the component to become a HOC higher order companent
+
+mapDispatchToProps -- passes the reducer action as props to the component
+// initiate the reducer action with mapDispatchToProps  and pass the action as prop to the component and call the action 
+on an event to set the state by firing the reducer function
+
+mapStateToProps -- passes the reducers state as props to the component
+// get the state and pass it as props to the component 
+
+
+
+
+heroku cli installed
+
+heroku --version
+
+heroku login // this will open in browser
+heroku login -i // this will prompt login inside the terminal
