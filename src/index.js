@@ -2,8 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux'; // initiate the redux state management on the application
-//import { PersistGate } from 'redux-persist/integration/react';
-import { store } from './redux/store';
+import { PersistGate } from 'redux-persist/integration/react'; // import the persist to configure the application to use the persist store
+import { store, persistor } from './redux/store';
+
 
 import { BrowserRouter } from 'react-router-dom';
 import './index.css';
@@ -14,7 +15,9 @@ import reportWebVitals from './reportWebVitals';
 ReactDOM.render(
   <Provider store={store}> 
     <BrowserRouter>
-      <App />
+      <PersistGate persistor={persistor}> 
+        <App /> 
+      </PersistGate>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')

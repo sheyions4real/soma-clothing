@@ -1,30 +1,22 @@
 import React from 'react';
+import { Route} from 'react-router-dom'; // since we want to initiate a sub route of the shop page
+// eg localhost:3000/shop/:ItemCategory
 
-import SHOP_DATA from './shop.data';
-import CollectionPreview from '../../components/preview-collection/preview-collection';
 
-class ShopPage extends React.Component{
-    constructor(props){
-        super(props);
+import CollectionsOverview from '../../components/collection-overview/collection-overview.component'
+import CollectionsPage from '../collection/collection.component';
 
-        this.state={
-            collections:SHOP_DATA
-    }
-}
-
-    render(){
-        const {collections} = this.state;
+// match, location, history are automatically passed as props to the ShopPage since Route from App.js called the /shop Route to render the ShopPage
+const ShopPage = ({match}) =>{
+    console.log(match.path);
         return(
             <div className='shop-page'>
-                  {
-                      collections.map(({id, ...otherCollectionsProps}) =>(
-                        <CollectionPreview key={id} {...otherCollectionsProps} />
-                      ))
-                 }   
+                
+                    <Route exact path={`${match.path}`} component={CollectionsOverview} />
+                    <Route  path={`${match.path}/:collectionId`} component={CollectionsPage} />
+               
             </div>
         )
     }
-}
-
 
 export default ShopPage;

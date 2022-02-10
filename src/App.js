@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Switch,Redirect } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 
 import { auth , createUserProfileDocument} from './firebase/firebase.config.utils';
@@ -14,6 +15,7 @@ import ShopPage from './pages/shop/shop.component';
 import Header from './components/header/header.component';
 import SignInAndSignUpPage from './pages/sign-in-and-signup/sign-in-and-signup.component';
 import CheckoutPage from './pages/checkout/checkout.component';
+import CategoryPage from './pages/collection/collection.component';
 
 
 //  const HatsPage =(props)=>{
@@ -86,11 +88,13 @@ class App extends React.Component {
     return (
       <div>
         <Header />
-        <Switch>
+        <Switch>    
+          {/* this Route automatically passes match, location and history as props to the Component it routes to */}
           <Route exact path="/" component={HomePage} />
-          <Route exact path="/shop" component={ShopPage} />
+          <Route  path="/shop" component={ShopPage} />  
           <Route exact path='/signIn' render={()=> this.props.currentUser? (<Redirect to='/' />): ( <SignInAndSignUpPage />) }/>
           <Route exact path="/checkout" component={CheckoutPage} />
+          {/* <Route  path={`/shop/:categoryId`} component={CategoryPage} /> */}
         </Switch>
       </div>
     
